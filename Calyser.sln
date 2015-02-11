@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Calyser", "Calyser", "{1C3FE0EC-33BC-4E8A-A9CF-B3189B90E2BF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Calyser.Shared", "Calyser\Calyser.Shared\Calyser.Shared.vcxitems", "{7BC33657-10BA-48DE-ABBD-219CA86A3A0B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Calyser.Windows", "Calyser\Calyser.Windows\Calyser.Windows.vcxproj", "{A94F6215-0D29-4B2C-8318-553832E73A5D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Calyser.WindowsPhone", "Calyser\Calyser.WindowsPhone\Calyser.WindowsPhone.vcxproj", "{D151C924-64CB-49A7-92B6-84DE906F0D4C}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Calyser\Calyser.Shared\Calyser.Shared.vcxitems*{a94f6215-0d29-4b2c-8318-553832e73a5d}*SharedItemsImports = 4
+		Calyser\Calyser.Shared\Calyser.Shared.vcxitems*{d151c924-64cb-49a7-92b6-84de906f0d4c}*SharedItemsImports = 4
+		Calyser\Calyser.Shared\Calyser.Shared.vcxitems*{7bc33657-10ba-48de-abbd-219ca86a3a0b}*SharedItemsImports = 9
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|ARM = Release|ARM
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Debug|ARM.Build.0 = Debug|ARM
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Debug|Win32.Build.0 = Debug|Win32
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Debug|Win32.Deploy.0 = Debug|Win32
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Debug|x64.ActiveCfg = Debug|x64
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Debug|x64.Build.0 = Debug|x64
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Debug|x64.Deploy.0 = Debug|x64
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Release|ARM.ActiveCfg = Release|ARM
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Release|ARM.Build.0 = Release|ARM
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Release|ARM.Deploy.0 = Release|ARM
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Release|Win32.ActiveCfg = Release|Win32
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Release|Win32.Build.0 = Release|Win32
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Release|Win32.Deploy.0 = Release|Win32
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Release|x64.ActiveCfg = Release|x64
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Release|x64.Build.0 = Release|x64
+		{A94F6215-0D29-4B2C-8318-553832E73A5D}.Release|x64.Deploy.0 = Release|x64
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Debug|ARM.ActiveCfg = Debug|ARM
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Debug|ARM.Build.0 = Debug|ARM
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Debug|ARM.Deploy.0 = Debug|ARM
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Debug|Win32.Build.0 = Debug|Win32
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Debug|Win32.Deploy.0 = Debug|Win32
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Debug|x64.ActiveCfg = Debug|Win32
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Release|ARM.ActiveCfg = Release|ARM
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Release|ARM.Build.0 = Release|ARM
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Release|ARM.Deploy.0 = Release|ARM
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Release|Win32.ActiveCfg = Release|Win32
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Release|Win32.Build.0 = Release|Win32
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Release|Win32.Deploy.0 = Release|Win32
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C}.Release|x64.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7BC33657-10BA-48DE-ABBD-219CA86A3A0B} = {1C3FE0EC-33BC-4E8A-A9CF-B3189B90E2BF}
+		{A94F6215-0D29-4B2C-8318-553832E73A5D} = {1C3FE0EC-33BC-4E8A-A9CF-B3189B90E2BF}
+		{D151C924-64CB-49A7-92B6-84DE906F0D4C} = {1C3FE0EC-33BC-4E8A-A9CF-B3189B90E2BF}
+	EndGlobalSection
+EndGlobal

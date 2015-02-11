@@ -1,0 +1,13 @@
+﻿<Application
+    x:Class="Calyser.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Calyser"
+    xmlns:localData="using:Shared">
+
+    <Application.Resources>
+
+      <x:String x:Key="AppName">Calyser</x:String>
+
+    </Application.Resources>
+</Application>
