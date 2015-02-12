@@ -23,7 +23,7 @@ namespace Calyser
 
 
 	private:
-		void Rotate(float radians);
+		void Rotate(float radiansX, float radiansY);
 
 	private:
 		// Cached pointer to device resources.

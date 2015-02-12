@@ -73,17 +73,18 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 		// Convert degrees to radians, then convert seconds to rotation angle
 		float radiansPerSecond = XMConvertToRadians(m_degreesPerSecond);
 		double totalRotation = timer.GetTotalSeconds() * radiansPerSecond;
-		float radians = static_cast<float>(fmod(totalRotation, XM_2PI));
+		float radiansX = static_cast<float>(fmod(totalRotation, XM_2PI));
 
-		Rotate(radians);
+		Rotate(radiansX,0.0);
 	}
 }
 
 // Rotate the 3D cube model a set amount of radians.
-void Sample3DSceneRenderer::Rotate(float radians)
+void Sample3DSceneRenderer::Rotate(float radiansX, float radiansY)
 {
 	// Prepare to pass the updated model matrix to the shader
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixRotationZ(radians)));
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixRotationZ(radiansX)*XMMatrixRotationX(radiansY)));
+	//
 }
 
 void Sample3DSceneRenderer::StartTracking()
@@ -97,12 +98,20 @@ void Sample3DSceneRenderer::TrackingUpdate(float positionX, float positionY)
 	if (m_tracking)
 	{
 		//
-		// Find out where moue position in object coordinates
 		//
-		//GetCursorPos(&p_mouse);
+		//D3D11_VIEWPORT viewport = m_deviceResources->GetD3DDeviceContext()->
+		//XMVECTOR p1, p2;
 		//
-		float radians = XM_2PI * 2.0f * positionX / m_deviceResources->GetOutputSize().Width;
-		Rotate(radians);
+		
+		//
+		//XMVECTOR minPointSource = XMVector3Unproject(p1, viewport.TopLeftX, viewport.TopLeftY, viewport.Width, viewport.Height, viewport.MinDepth, viewport.MaxDepth, matProject, matView, matWorld);
+		//
+		float radiansX = XM_2PI * 2.0f * positionX / m_deviceResources->GetOutputSize().Width;
+		float radiansY = XM_2PI * 2.0f * positionY / m_deviceResources->GetOutputSize().Width;
+		//
+		Rotate(radiansX, radiansY);
+		//
+
 	}
 }
 
