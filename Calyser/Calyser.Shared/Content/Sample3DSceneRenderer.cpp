@@ -75,6 +75,8 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 		double totalRotation = timer.GetTotalSeconds() * radiansPerSecond;
 		float radiansX = static_cast<float>(fmod(totalRotation, XM_2PI));
 
+		
+
 		Rotate(radiansX,0.0);
 	}
 }
@@ -98,13 +100,26 @@ void Sample3DSceneRenderer::TrackingUpdate(float positionX, float positionY)
 	if (m_tracking)
 	{
 		//
+		D3D11_VIEWPORT viewport = m_deviceResources->GetScreenViewport();
+		XMVECTOR cursor1 = XMVectorSet(positionX, positionY, viewport.MinDepth, 0.0);
+		XMVECTOR cursor2 = XMVectorSet(positionX, positionY, viewport.MaxDepth, 0.0);
 		//
-		//D3D11_VIEWPORT viewport = m_deviceResources->GetD3DDeviceContext()->
-		//XMVECTOR p1, p2;
+		XMVECTOR minPointSource = XMVector3Unproject(cursor1, viewport.TopLeftX, viewport.TopLeftY, viewport.Width, viewport.Height, viewport.MinDepth, viewport.MaxDepth, XMLoadFloat4x4(&m_constantBufferData.projection), XMLoadFloat4x4(&m_constantBufferData.view), XMLoadFloat4x4(&m_constantBufferData.model));
+		XMVECTOR maxPointSource = XMVector3Unproject(cursor2, viewport.TopLeftX, viewport.TopLeftY, viewport.Width, viewport.Height, viewport.MinDepth, viewport.MaxDepth, XMLoadFloat4x4(&m_constantBufferData.projection), XMLoadFloat4x4(&m_constantBufferData.view), XMLoadFloat4x4(&m_constantBufferData.model));
 		//
-		
+		XMVECTOR RAY = XMVector3Normalize(maxPointSource - minPointSource);
 		//
-		//XMVECTOR minPointSource = XMVector3Unproject(p1, viewport.TopLeftX, viewport.TopLeftY, viewport.Width, viewport.Height, viewport.MinDepth, viewport.MaxDepth, matProject, matView, matWorld);
+		std::wstring output = L"Test ";
+		output.append(L" Xmin= ");
+		output.append(std::to_wstring(XMVectorGetX(minPointSource)));
+		output.append(L" Ymin= ");
+		output.append(std::to_wstring(XMVectorGetY(minPointSource)));
+		output.append(L" Xmax= ");
+		output.append(std::to_wstring(XMVectorGetX(maxPointSource)));
+		output.append(L" Ymax= ");
+		output.append(std::to_wstring(XMVectorGetY(maxPointSource)));
+		output.append(L" Try \n");
+		OutputDebugString(output.c_str());
 		//
 		float radiansX = XM_2PI * 2.0f * positionX / m_deviceResources->GetOutputSize().Width;
 		float radiansY = XM_2PI * 2.0f * positionY / m_deviceResources->GetOutputSize().Width;
