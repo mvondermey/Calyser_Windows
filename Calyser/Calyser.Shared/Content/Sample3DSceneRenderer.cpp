@@ -18,6 +18,9 @@ Sample3DSceneRenderer::Sample3DSceneRenderer(const std::shared_ptr<DX::DeviceRes
 {
 	CreateDeviceDependentResources();
 	CreateWindowSizeDependentResources();
+	//
+	
+	//
 }
 
 // Initializes view parameters when the window size changes.
@@ -146,6 +149,8 @@ void Sample3DSceneRenderer::Render()
 
 	auto context = m_deviceResources->GetD3DDeviceContext();
 
+	
+
 	// Prepare the constant buffer to send it to the graphics device.
 	context->UpdateSubresource(
 		m_constantBuffer.Get(),
@@ -173,7 +178,7 @@ void Sample3DSceneRenderer::Render()
 		0
 		);
 
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
 
 	context->IASetInputLayout(m_inputLayout.Get());
 
@@ -267,14 +272,28 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		// Load mesh vertices. Each vertex has a position and a color.
 		static const VertexPositionColor cubeVertices[] = 
 		{
-			{XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(0.0f, 0.0f, 0.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.5f), XMFLOAT3(0.0f, 0.0f, 1.0f)},
-			{XMFLOAT3(-0.5f,  0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 0.0f)},
-			{XMFLOAT3(-0.5f,  0.5f,  0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3( 0.5f, -0.5f, -0.5f), XMFLOAT3(1.0f, 0.0f, 0.0f)},
-			{XMFLOAT3( 0.5f, -0.5f,  0.5f), XMFLOAT3(1.0f, 0.0f, 1.0f)},
-			{XMFLOAT3( 0.5f,  0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 0.0f)},
-			{XMFLOAT3( 0.5f,  0.5f,  0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{ XMFLOAT3(-0.5f, 0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, 0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
 		};
 
 		D3D11_SUBRESOURCE_DATA vertexBufferData = {0};
@@ -314,6 +333,12 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 
 			1,3,7, // +z
 			1,7,5,
+
+			10,11,12,
+			20,21,22,
+
+			1,20,5,
+			10,3,23,
 		};
 
 		m_indexCount = ARRAYSIZE(cubeIndices);
