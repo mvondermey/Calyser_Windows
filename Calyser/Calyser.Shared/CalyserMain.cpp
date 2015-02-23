@@ -7,6 +7,7 @@ using namespace Windows::Foundation;
 using namespace Windows::System::Threading;
 using namespace Concurrency;
 
+
 // Loads and initializes application assets when the application is loaded.
 CalyserMain::CalyserMain(const std::shared_ptr<DX::DeviceResources>& deviceResources) :
 m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_pointerLocationY(0.0f)

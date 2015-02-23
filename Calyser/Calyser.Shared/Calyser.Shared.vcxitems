@@ -14,8 +14,10 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CommunicationLayer.cpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CalyserMain.h" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CalyserMain.cpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommunicationLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)pch.h" />
     <ClCompile Include="$(MSBuildThisFileDirectory)pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

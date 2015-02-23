@@ -122,7 +122,7 @@ void Sample3DSceneRenderer::TrackingUpdate(float positionX, float positionY)
 		output.append(L" Ymax= ");
 		output.append(std::to_wstring(XMVectorGetY(maxPointSource)));
 		output.append(L" Try \n");
-		OutputDebugString(output.c_str());
+		//OutputDebugString(output.c_str());
 		//
 		float radiansX = XM_2PI * 2.0f * positionX / m_deviceResources->GetOutputSize().Width;
 		float radiansY = XM_2PI * 2.0f * positionY / m_deviceResources->GetOutputSize().Width;

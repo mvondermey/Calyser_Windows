@@ -77,32 +77,33 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props" Condition="exists('$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props" Condition="exists('$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props" Condition="exists('$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props" Condition="exists('$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props" Condition="exists('$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props" Condition="exists('$(ExtensionSDKDirectoryRoot)\Windows\v$(TargetPlatformVersion)\ExtensionSDKs\SQLite.WinRT81\3.8.8.1\DesignTime\CommonConfiguration\Neutral\SQLite.WinRT81.props')" />
   </ImportGroup>
-
   <Import Project="..\Calyser.Shared\Calyser.Shared.vcxitems" Label="Shared" />
-
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    
     <PackageCertificateKeyFile>Calyser.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
-    
   </PropertyGroup>
-  
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
       <AdditionalDependencies>d2d1.lib; d3d11.lib; dxgi.lib; ole32.lib; windowscodecs.lib; dwrite.lib; %(AdditionalDependencies)</AdditionalDependencies>
@@ -112,9 +113,9 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-	  <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-	  <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SQLITE_OMIT_LOAD_EXTENSION;SQLITE_WIN32_FILEMAPPING_API;SQLITE_OS_WINRT</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
@@ -126,9 +127,9 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-	  <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-	  <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SQLITE_OMIT_LOAD_EXTENSION;SQLITE_WIN32_FILEMAPPING_API;SQLITE_OS_WINRT</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -140,9 +141,9 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-	  <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-	  <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SQLITE_OMIT_LOAD_EXTENSION;SQLITE_WIN32_FILEMAPPING_API;SQLITE_OS_WINRT</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -154,9 +155,9 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-	  <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-	  <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SQLITE_OMIT_LOAD_EXTENSION;SQLITE_WIN32_FILEMAPPING_API;SQLITE_OS_WINRT</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -168,9 +169,9 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-	  <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-	  <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SQLITE_OMIT_LOAD_EXTENSION;SQLITE_WIN32_FILEMAPPING_API;SQLITE_OS_WINRT</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -182,12 +183,11 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(IntermediateOutputPath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-	  <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
-	  <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SQLITE_OMIT_LOAD_EXTENSION;SQLITE_WIN32_FILEMAPPING_API;SQLITE_OS_WINRT</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
-  
   <ItemGroup>
     <Image Include="Assets\Logo.png" />
     <Image Include="Assets\SmallLogo.png" />
@@ -214,9 +214,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    
     <None Include="Calyser.Windows_TemporaryKey.pfx" />
-    
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -225,6 +223,9 @@
     <Page Include="DirectXPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="SQLite.WinRT81, Version=3.8.8.1" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
