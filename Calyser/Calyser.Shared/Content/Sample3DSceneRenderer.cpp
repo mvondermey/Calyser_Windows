@@ -1,10 +1,9 @@
 ﻿#include "pch.h"
 #include "Sample3DSceneRenderer.h"
-
 #include "..\Common\DirectXHelper.h"
 
 using namespace Calyser;
-
+using namespace std;
 using namespace DirectX;
 using namespace Windows::Foundation;
 
@@ -112,17 +111,8 @@ void Sample3DSceneRenderer::TrackingUpdate(float positionX, float positionY)
 		//
 		XMVECTOR RAY = XMVector3Normalize(maxPointSource - minPointSource);
 		//
-		std::wstring output = L"Test ";
-		output.append(L" Xmin= ");
-		output.append(std::to_wstring(XMVectorGetX(minPointSource)));
-		output.append(L" Ymin= ");
-		output.append(std::to_wstring(XMVectorGetY(minPointSource)));
-		output.append(L" Xmax= ");
-		output.append(std::to_wstring(XMVectorGetX(maxPointSource)));
-		output.append(L" Ymax= ");
-		output.append(std::to_wstring(XMVectorGetY(maxPointSource)));
-		output.append(L" Try \n");
-		//OutputDebugString(output.c_str());
+		//td::string output = "TEST\n" ;
+		//OutputDebugStringA(output.c_str());
 		//
 		float radiansX = XM_2PI * 2.0f * positionX / m_deviceResources->GetOutputSize().Width;
 		float radiansY = XM_2PI * 2.0f * positionY / m_deviceResources->GetOutputSize().Width;
@@ -272,28 +262,94 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		// Load mesh vertices. Each vertex has a position and a color.
 		static const VertexPositionColor cubeVertices[] = 
 		{
-			{XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f, -0.4f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f, -0.3f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f, -0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f, -0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{XMFLOAT3(-0.5f, -0.5f,  0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
 			{XMFLOAT3(-0.5f, -0.5f,  0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
 			{XMFLOAT3(-0.5f, -0.5f,  0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
 			{XMFLOAT3(-0.5f, -0.5f,  0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{ XMFLOAT3(-0.5f, 0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, 0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f, 0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, 0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.4f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, -0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.3f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, -0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, -0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, -0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.0f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, -0.4f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, -0.3f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, -0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, -0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, 0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, 0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.1f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, -0.4f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, -0.3f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, -0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, -0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, 0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, 0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.2f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) }
 		};
 
 		D3D11_SUBRESOURCE_DATA vertexBufferData = {0};
@@ -314,40 +370,39 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		// For example: 0,2,1 means that the vertices with indexes
 		// 0, 2 and 1 from the vertex buffer compose the 
 		// first triangle of this mesh.
-		static const unsigned short cubeIndices [] =
-		{
-			0,2,1, // -x
-			1,2,3,
 
-			4,5,6, // +x
-			5,7,6,
+		int numberVertices = (ARRAYSIZE(cubeVertices)/2);
+		OutputDebugStringA("Number of Vertices \n");
+		OutputDebugStringA(to_string(numberVertices).c_str());
+		OutputDebugStringA("\n");
 
-			0,1,5, // -y
-			0,5,4,
+		static vector<int> cubeIndicesVector;
 
-			2,6,7, // +y
-			2,7,3,
+		for (int i = 0; i < numberVertices; i++){
+			for (int j = 0; j < numberVertices; j++){
+				if (i < j) cubeIndicesVector.push_back(i);
+				if (i < j) cubeIndicesVector.push_back(j);
+				//OutputDebugStringA(to_string(i).c_str());
+				//OutputDebugStringA(" = ");
+				//OutputDebugStringA(to_string(j).c_str());
+				//OutputDebugStringA(" \n ");
 
-			0,4,6, // -z
-			0,6,2,
+			}
+		}
 
-			1,3,7, // +z
-			1,7,5,
+		OutputDebugStringA("After Loop \n");
 
-			10,11,12,
-			20,21,22,
+		//unsigned short cubeIndices[1000000];
+		//std::copy(cubeVerticesVector.begin(), cubeVerticesVector.end(); cubeIndices);
 
-			1,20,5,
-			10,3,23,
-		};
-
-		m_indexCount = ARRAYSIZE(cubeIndices);
+		//m_indexCount = ARRAYSIZE(cubeIndices);
+		m_indexCount = cubeIndicesVector.size();
 
 		D3D11_SUBRESOURCE_DATA indexBufferData = {0};
-		indexBufferData.pSysMem = cubeIndices;
+		indexBufferData.pSysMem = &cubeIndicesVector[0];
 		indexBufferData.SysMemPitch = 0;
 		indexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC indexBufferDesc(sizeof(cubeIndices), D3D11_BIND_INDEX_BUFFER);
+		CD3D11_BUFFER_DESC indexBufferDesc(cubeIndicesVector.size(), D3D11_BIND_INDEX_BUFFER);
 		DX::ThrowIfFailed(
 			m_deviceResources->GetD3DDevice()->CreateBuffer(
 				&indexBufferDesc,

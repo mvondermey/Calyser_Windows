@@ -1,11 +1,13 @@
 ﻿#include "pch.h"
 #include "CalyserMain.h"
 #include "Common\DirectXHelper.h"
+#include "CommunicationLayer.h" 
 
 using namespace Calyser;
 using namespace Windows::Foundation;
 using namespace Windows::System::Threading;
 using namespace Concurrency;
+using namespace CommunicationLayerN;
 
 
 // Loads and initializes application assets when the application is loaded.
@@ -26,6 +28,15 @@ m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_pointerLocationY
 	m_timer.SetFixedTimeStep(true);
 	m_timer.SetTargetElapsedSeconds(1.0 / 60);
 	*/
+	// Start CommunicationLayer
+	
+	//
+	CommunicationLayer ^m_CommunicationLayer = ref new CommunicationLayer();
+	//
+	m_CommunicationLayer->Runlistener(8080);
+	//
+//
+
 }
 
 CalyserMain::~CalyserMain()
