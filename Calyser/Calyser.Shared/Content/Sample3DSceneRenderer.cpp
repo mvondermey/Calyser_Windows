@@ -75,10 +75,8 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 		// Convert degrees to radians, then convert seconds to rotation angle
 		float radiansPerSecond = XMConvertToRadians(m_degreesPerSecond);
 		double totalRotation = timer.GetTotalSeconds() * radiansPerSecond;
-		float radiansX = static_cast<float>(fmod(totalRotation, XM_2PI));
-
-		
-
+		float radiansX = static_cast<float>(fmod(totalRotation, XM_2PI));		
+//
 		Rotate(radiansX,0.0);
 	}
 }
@@ -102,12 +100,42 @@ void Sample3DSceneRenderer::TrackingUpdate(float positionX, float positionY)
 	if (m_tracking)
 	{
 		//
+		// Reset Vertex
+		//
+		//for (int i = 0; i<cubeVerticesVector.size(); i++){
+		//	cubeVerticesVector.at(i).color = XMFLOAT3(1.0f, 1.0f, 0.0f);
+		//	{ XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) };
+		//}
+		//
+		D3D11_SUBRESOURCE_DATA vertexBufferData = { 0 };
+		vertexBufferData.pSysMem = &cubeVerticesVector[0];
+		vertexBufferData.SysMemPitch = 0;
+		vertexBufferData.SysMemSlicePitch = 0;
+		CD3D11_BUFFER_DESC vertexBufferDesc(cubeVerticesVector.size()*sizeof(VertexPositionColor), D3D11_BIND_VERTEX_BUFFER);
+		DX::ThrowIfFailed(
+			m_deviceResources->GetD3DDevice()->CreateBuffer(
+			&vertexBufferDesc,
+			&vertexBufferData,
+			&m_vertexBuffer
+			)
+		);
+		//
+		//
 		D3D11_VIEWPORT viewport = m_deviceResources->GetScreenViewport();
 		XMVECTOR cursor1 = XMVectorSet(positionX, positionY, viewport.MinDepth, 0.0);
 		XMVECTOR cursor2 = XMVectorSet(positionX, positionY, viewport.MaxDepth, 0.0);
 		//
 		XMVECTOR minPointSource = XMVector3Unproject(cursor1, viewport.TopLeftX, viewport.TopLeftY, viewport.Width, viewport.Height, viewport.MinDepth, viewport.MaxDepth, XMLoadFloat4x4(&m_constantBufferData.projection), XMLoadFloat4x4(&m_constantBufferData.view), XMLoadFloat4x4(&m_constantBufferData.model));
 		XMVECTOR maxPointSource = XMVector3Unproject(cursor2, viewport.TopLeftX, viewport.TopLeftY, viewport.Width, viewport.Height, viewport.MinDepth, viewport.MaxDepth, XMLoadFloat4x4(&m_constantBufferData.projection), XMLoadFloat4x4(&m_constantBufferData.view), XMLoadFloat4x4(&m_constantBufferData.model));
+		//
+		XMStoreFloat3(&(cubeVerticesVector.at(0).pos),minPointSource);
+		XMStoreFloat3(&(cubeVerticesVector.at(1).pos),maxPointSource);
+		OutputDebugStringA(to_string(cubeVerticesVector.at(0).pos.x).c_str());
+		OutputDebugStringA(" = ");
+		OutputDebugStringA(to_string(cubeVerticesVector.at(0).pos.y).c_str());
+		OutputDebugStringA(" = ");
+		OutputDebugStringA(to_string(cubeVerticesVector.at(0).pos.z).c_str());
+		OutputDebugStringA(" \n ");
 		//
 		XMVECTOR RAY = XMVector3Normalize(maxPointSource - minPointSource);
 		//
@@ -117,7 +145,7 @@ void Sample3DSceneRenderer::TrackingUpdate(float positionX, float positionY)
 		float radiansX = XM_2PI * 2.0f * positionX / m_deviceResources->GetOutputSize().Width;
 		float radiansY = XM_2PI * 2.0f * positionY / m_deviceResources->GetOutputSize().Width;
 		//
-		Rotate(radiansX, radiansY);
+		//Rotate(radiansX, radiansY);
 		//
 
 	}
@@ -131,11 +159,15 @@ void Sample3DSceneRenderer::StopTracking()
 // Renders one frame using the vertex and pixel shaders.
 void Sample3DSceneRenderer::Render()
 {
+	//
+	//OutputDebugStringA("Render...\n");
+	//
 	// Loading is asynchronous. Only draw geometry after it's loaded.
 	if (!m_loadingComplete)
 	{
 		return;
 	}
+	//
 
 	auto context = m_deviceResources->GetD3DDeviceContext();
 
@@ -281,13 +313,13 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 			*/
 		};
 
-		vector<VertexPositionColor> cubeVerticesVector;
+
 		cubeVerticesVector.push_back({ XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) });
 		cubeVerticesVector.push_back({ XMFLOAT3( 0.5f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) });
 		cubeVerticesVector.push_back({ XMFLOAT3(0.5f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) });
 		cubeVerticesVector.push_back({ XMFLOAT3(-0.5f, -0.5f, 0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) });
 
-		int m_div = 10;
+		int m_div = 4;
 		cubeVerticesVector.clear();
 		for (int i=0; i < m_div; i++) {
 			for (int j=0; j < m_div; j++){
@@ -295,7 +327,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 				float xmax = 0.5f;
 				float x = (xmax - xmin)*i / m_div + xmin;
 				float y = (xmax - xmin)*j / m_div + xmin;
-				cubeVerticesVector.push_back({ XMFLOAT3(x, -0.5f, y), XMFLOAT3(0.0f, 1.0f, 1.0f) });
+				cubeVerticesVector.push_back({ XMFLOAT3(x, -0.5f, y), XMFLOAT3(0.0f, 0.0f, .0f) });
 				OutputDebugStringA(to_string(x).c_str());
 				OutputDebugStringA(" = ");
 				OutputDebugStringA(to_string(y).c_str());
@@ -321,6 +353,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 				)
 			);
 
+
 		// Load mesh indices. Each trio of indices represents
 		// a triangle to be rendered on the screen.
 		// For example: 0,2,1 means that the vertices with indexes
@@ -333,7 +366,8 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		OutputDebugStringA("\n");
 
 		static vector<short> cubeIndicesVector;
-
+		cubeIndicesVector.push_back(0);
+		cubeIndicesVector.push_back(1);
 		for (int i = 0; i < numberVertices; i++){
 			for (int j = 0; j < numberVertices; j++){
 				if (i != j) {
@@ -344,7 +378,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 				//OutputDebugStringA(" = ");
 				//OutputDebugStringA(to_string(j).c_str());
 				//OutputDebugStringA(" \n ");
-
+//
 			}
 		}
 
