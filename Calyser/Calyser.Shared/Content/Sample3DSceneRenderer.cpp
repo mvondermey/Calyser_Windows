@@ -287,12 +287,21 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		cubeVerticesVector.push_back({ XMFLOAT3(0.5f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) });
 		cubeVerticesVector.push_back({ XMFLOAT3(-0.5f, -0.5f, 0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) });
 
-		for (int i; i < 10; i++) {
-			for (int j; j < 10; j++){
+		int m_div = 10;
+		cubeVerticesVector.clear();
+		for (int i=0; i < m_div; i++) {
+			for (int j=0; j < m_div; j++){
 				float xmin = -0.5f;
 				float xmax = 0.5f;
-				int div = 
+				float x = (xmax - xmin)*i / m_div + xmin;
+				float y = (xmax - xmin)*j / m_div + xmin;
+				cubeVerticesVector.push_back({ XMFLOAT3(x, -0.5f, y), XMFLOAT3(0.0f, 1.0f, 1.0f) });
+				OutputDebugStringA(to_string(x).c_str());
+				OutputDebugStringA(" = ");
+				OutputDebugStringA(to_string(y).c_str());
+				OutputDebugStringA("\n");
 
+				//
 			}
 		}
 
@@ -318,7 +327,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		// 0, 2 and 1 from the vertex buffer compose the 
 		// first triangle of this mesh.
 
-		int numberVertices = (ARRAYSIZE(cubeVertices));
+		int numberVertices = (cubeVerticesVector.size());
 		OutputDebugStringA("Number of Vertices \n");
 		OutputDebugStringA(to_string(numberVertices).c_str());
 		OutputDebugStringA("\n");
