@@ -262,101 +262,48 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		// Load mesh vertices. Each vertex has a position and a color.
 		static const VertexPositionColor cubeVertices[] = 
 		{
-			{XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f, -0.4f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f, -0.3f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f, -0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f, -0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{XMFLOAT3(-0.5f, -0.5f,  0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f)},
-			{ XMFLOAT3(-0.4f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, 0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.4f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, -0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.3f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, -0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.2f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, -0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.1f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, -0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, -0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, -0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, -0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, -0.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, 0.1f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, 0.2f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(-0.0f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, -0.4f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, -0.3f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, -0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, -0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, 0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, 0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.1f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, -0.4f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, -0.3f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, -0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, -0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, 0.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, 0.1f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, 0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, 0.3f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, 0.4f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.2f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) }
+			//Plane 1
+			{ XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{ XMFLOAT3(0.5f, -0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.5f, -0.5f, 0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, -0.5f, 0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.2f, -0.5f, 0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3( 0.2f, -0.5f, 0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, 0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.1f, -0.5f, 0.2f), XMFLOAT3(1.0f, 1.0f, 1.0f) }
+
+
+			/*
+			{ XMFLOAT3(-0.5f, 0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f)},
+			{ XMFLOAT3(0.5f, 0.5f, -0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(0.5f, 0.5f, 0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) },
+			{ XMFLOAT3(-0.5f, 0.5f, 0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) }
+			*/
 		};
 
+		vector<VertexPositionColor> cubeVerticesVector;
+		cubeVerticesVector.push_back({ XMFLOAT3(-0.5f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) });
+		cubeVerticesVector.push_back({ XMFLOAT3( 0.5f, -0.5f, -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) });
+		cubeVerticesVector.push_back({ XMFLOAT3(0.5f, -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) });
+		cubeVerticesVector.push_back({ XMFLOAT3(-0.5f, -0.5f, 0.5f), XMFLOAT3(1.0f, 1.0f, 1.0f) });
+
+		for (int i; i < 10; i++) {
+			for (int j; j < 10; j++){
+				float xmin = -0.5f;
+				float xmax = 0.5f;
+				int div = 
+
+			}
+		}
+
+
+		//std::copy(cubeVerticesVector.begin(),cubeVerticesVector.end(),cubeVertices);
+
 		D3D11_SUBRESOURCE_DATA vertexBufferData = {0};
-		vertexBufferData.pSysMem = cubeVertices;
+		vertexBufferData.pSysMem = &cubeVerticesVector[0];
 		vertexBufferData.SysMemPitch = 0;
 		vertexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC vertexBufferDesc(sizeof(cubeVertices), D3D11_BIND_VERTEX_BUFFER);
+		CD3D11_BUFFER_DESC vertexBufferDesc(cubeVerticesVector.size()*sizeof(VertexPositionColor), D3D11_BIND_VERTEX_BUFFER);
 		DX::ThrowIfFailed(
 			m_deviceResources->GetD3DDevice()->CreateBuffer(
 				&vertexBufferDesc,
@@ -371,17 +318,19 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 		// 0, 2 and 1 from the vertex buffer compose the 
 		// first triangle of this mesh.
 
-		int numberVertices = (ARRAYSIZE(cubeVertices)/2);
+		int numberVertices = (ARRAYSIZE(cubeVertices));
 		OutputDebugStringA("Number of Vertices \n");
 		OutputDebugStringA(to_string(numberVertices).c_str());
 		OutputDebugStringA("\n");
 
-		static vector<int> cubeIndicesVector;
+		static vector<short> cubeIndicesVector;
 
 		for (int i = 0; i < numberVertices; i++){
 			for (int j = 0; j < numberVertices; j++){
-				if (i < j) cubeIndicesVector.push_back(i);
-				if (i < j) cubeIndicesVector.push_back(j);
+				if (i != j) {
+					cubeIndicesVector.push_back(i);
+					cubeIndicesVector.push_back(j);
+				}
 				//OutputDebugStringA(to_string(i).c_str());
 				//OutputDebugStringA(" = ");
 				//OutputDebugStringA(to_string(j).c_str());
@@ -394,15 +343,35 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 
 		//unsigned short cubeIndices[1000000];
 		//std::copy(cubeVerticesVector.begin(), cubeVerticesVector.end(); cubeIndices);
-
+		/* short cubeIndices[] = {
+			0, 1,
+			1,2,
+			2,3,
+			3,0,
+			0,2,
+			//
+			0,4,
+			1,4,
+			2,4,
+			3,4
+		};
+		//
+		*/
+		//short mytest []= cubeIndicesVector;
+		//
+		//std::copy(cubeIndicesVector.begin(), cubeIndicesVector.end(), cubeIndices);
+		//
 		//m_indexCount = ARRAYSIZE(cubeIndices);
 		m_indexCount = cubeIndicesVector.size();
+		/*
 
+		*/
+		//
 		D3D11_SUBRESOURCE_DATA indexBufferData = {0};
 		indexBufferData.pSysMem = &cubeIndicesVector[0];
 		indexBufferData.SysMemPitch = 0;
 		indexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC indexBufferDesc(cubeIndicesVector.size(), D3D11_BIND_INDEX_BUFFER);
+		CD3D11_BUFFER_DESC indexBufferDesc(cubeIndicesVector.size()*sizeof(short), D3D11_BIND_INDEX_BUFFER);
 		DX::ThrowIfFailed(
 			m_deviceResources->GetD3DDevice()->CreateBuffer(
 				&indexBufferDesc,
@@ -411,7 +380,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources()
 				)
 			);
 	});
-
+	//
 	// Once the cube is loaded, the object is ready to be rendered.
 	createCubeTask.then([this] () {
 		m_loadingComplete = true;
