@@ -48,5 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="DirectXPage.xaml" />
+    <Page Include="Login.xaml" />
   </ItemGroup>
 </Project>

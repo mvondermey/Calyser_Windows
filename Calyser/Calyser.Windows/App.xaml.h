@@ -7,6 +7,7 @@
 
 #include "App.g.h"
 #include "DirectXPage.xaml.h"
+#include "Login.xaml.h"
 
 namespace Calyser
 {
@@ -23,5 +24,6 @@ namespace Calyser
 		void OnSuspending(Platform::Object^ sender, Windows::ApplicationModel::SuspendingEventArgs^ e);
 		void OnResuming(Platform::Object ^sender, Platform::Object ^args);
 		DirectXPage^ m_directXPage;
+		Login^ m_login;
 	};
 }

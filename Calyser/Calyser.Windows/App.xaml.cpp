@@ -48,6 +48,12 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 	}
 #endif
 
+	if ( m_login == nullptr)
+	{
+		m_login = ref new Login();
+	}
+
+
 	if (m_directXPage == nullptr)
 	{
 		m_directXPage = ref new DirectXPage();
@@ -59,7 +65,8 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 	}
 
 	// Place the page in the current window and ensure that it is active.
-	Window::Current->Content = m_directXPage;
+	//	Window::Current->Content = m_directXPage;
+	Window::Current->Content = m_login;
 	Window::Current->Activate();
 }
 
