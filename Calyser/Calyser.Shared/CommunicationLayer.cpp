@@ -5,11 +5,13 @@
 #include <collection.h>
 #include <ppltasks.h>
 #include <concurrent_vector.h>
+#include <string.h>
 #include <sqlite3.h>
+#include <string>
 
 using namespace concurrency;
 using namespace std;
-using namespace CommunicationLayerN;
+using namespace CommLayer;
 
 using namespace Platform;
 using namespace Platform::Collections;
@@ -35,12 +37,23 @@ void CommunicationLayer::ReadDB(){
 		return FileIO::ReadTextAsync(file);
 	}).then([this](concurrency::task<String^> previousOperation) {
 		
-	
-	
 		}
 	);
 //	
-}
+};
+
+int CheckLogin(String^ login,String^ password) {
+
+	OutputDebugString(" Email ");
+	OutputDebugStringW((login)->ToString()->Data());
+	OutputDebugString("\n");
+	OutputDebugString(" Pasword ");
+	OutputDebugStringW((password)->ToString()->Data());
+	OutputDebugString("\n");
+
+	return 0;
+
+};
 
 void CommunicationLayer::OnConnectionReceived(StreamSocketListener ^sender, StreamSocketListenerConnectionReceivedEventArgs ^args)
 {
@@ -73,7 +86,7 @@ IAsyncOperationWithProgress<IVector<int>^, double>^ CommunicationLayer::Runliste
 		//
 		StreamSocketListener^ Listener = ref new StreamSocketListener;
 		//
-		Listener->ConnectionReceived += ref new Windows::Foundation::TypedEventHandler<Windows::Networking::Sockets::StreamSocketListener ^, Windows::Networking::Sockets::StreamSocketListenerConnectionReceivedEventArgs ^>(this, &CommunicationLayerN::CommunicationLayer::OnConnectionReceived);
+		Listener->ConnectionReceived += ref new Windows::Foundation::TypedEventHandler<Windows::Networking::Sockets::StreamSocketListener ^, Windows::Networking::Sockets::StreamSocketListenerConnectionReceivedEventArgs ^>(this, &CommLayer::CommunicationLayer::OnConnectionReceived);
 		//
 		
 		auto m_BindService = Listener->BindServiceNameAsync("8080");

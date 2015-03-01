@@ -19,6 +19,7 @@
       <Filter>Content</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommunicationLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CalyserMain.cpp" />
@@ -33,6 +34,7 @@
       <Filter>Content</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)CommunicationLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)Content\SamplePixelShader.hlsl">

@@ -15,6 +15,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)CommunicationLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)User.cpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CalyserMain.h" />
     <ClCompile Include="$(MSBuildThisFileDirectory)CalyserMain.cpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommunicationLayer.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Content\Sample3DSceneRenderer.h" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\SampleFpsTextRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Content\Sample3DSceneRenderer.cpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)User.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="$(MSBuildThisFileDirectory)Content\SamplePixelShader.hlsl">

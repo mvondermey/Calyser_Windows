@@ -1,13 +1,20 @@
 #pragma once
 
 
-
-namespace CommunicationLayerN{
+ 
+namespace CommLayer{
 
 	ref class CommunicationLayer sealed
 	{
 	public:
+
+		int LOGIN_SUCCEED = 1;
+		int LOGIN_EXIST_PASSWORD_WRONG = 2;
+		int LOGIN_NOT_EXIST = 3;
+
 		CommunicationLayer();
+
+		int CheckLogin( Platform::String^ login, Platform::String^password);
 
 		void ReadDB();
 

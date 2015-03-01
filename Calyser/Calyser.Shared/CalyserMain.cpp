@@ -7,7 +7,7 @@ using namespace Calyser;
 using namespace Windows::Foundation;
 using namespace Windows::System::Threading;
 using namespace Concurrency;
-using namespace CommunicationLayerN;
+using namespace CommLayer;
 
 
 // Loads and initializes application assets when the application is loaded.
