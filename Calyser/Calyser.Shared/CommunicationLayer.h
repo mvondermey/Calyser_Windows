@@ -4,17 +4,21 @@
  
 namespace CommLayer{
 
+	enum LOGIN_RESULT
+	{
+		LOGIN_SUCCEED = 0,
+		LOGIN_EXIST_PASSWORD_WRONG,
+		LOGIN_NOT_EXIST
+	};
+
 	ref class CommunicationLayer sealed
 	{
 	public:
 
-		int LOGIN_SUCCEED = 1;
-		int LOGIN_EXIST_PASSWORD_WRONG = 2;
-		int LOGIN_NOT_EXIST = 3;
 
 		CommunicationLayer();
 
-		int CheckLogin( Platform::String^ login, Platform::String^password);
+		int CheckLogin( Platform::String^ login, Platform::String^ password);
 
 		void ReadDB();
 

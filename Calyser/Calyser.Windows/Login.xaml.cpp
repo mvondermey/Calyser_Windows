@@ -5,7 +5,7 @@
 
 #include "pch.h"
 #include "Login.xaml.h"
-#include "CommunicationLayer.h"
+
 
 using namespace Calyser;
 
@@ -119,7 +119,9 @@ void Calyser::Login::login_click(Platform::Object^ sender, Windows::UI::Xaml::Ro
 
 	//
 	CommLayer::CommunicationLayer^ m_CommLayer = ref new CommLayer::CommunicationLayer();
-    m_CommLayer->CheckLogin(email->Text->ToString(), password->Password->ToString());
+	//m_CommLayer->ReadDB();
+	//
+    int result = m_CommLayer->CheckLogin(email->Text->ToString(), password->Password->ToString());
 	//
 }
 

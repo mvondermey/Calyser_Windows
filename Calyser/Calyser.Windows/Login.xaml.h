@@ -7,6 +7,7 @@
 
 #include "Login.g.h"
 #include "Common\NavigationHelper.h"
+#include <CommunicationLayer.h>
 
 namespace Calyser
 {

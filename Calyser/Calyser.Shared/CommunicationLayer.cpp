@@ -42,14 +42,14 @@ void CommunicationLayer::ReadDB(){
 //	
 };
 
-int CheckLogin(String^ login,String^ password) {
+int CommunicationLayer::CheckLogin(String^ login, String^ password) {
 
-	OutputDebugString(" Email ");
+	OutputDebugStringW(L" Email ");
 	OutputDebugStringW((login)->ToString()->Data());
-	OutputDebugString("\n");
-	OutputDebugString(" Pasword ");
+	OutputDebugStringW(L"\n");
+	OutputDebugStringW(L" Pasword ");
 	OutputDebugStringW((password)->ToString()->Data());
-	OutputDebugString("\n");
+	OutputDebugStringW(L"\n");
 
 	return 0;
 
