@@ -29,6 +29,9 @@ namespace CommLayer{
 			
 		void OnConnectionReceived(Windows::Networking::Sockets::StreamSocketListener ^, Windows::Networking::Sockets::StreamSocketListenerConnectionReceivedEventArgs ^);
 
+//		int callback(void *data, int argc, char **argv, char **azColName);
+
+
 	};
 
 }

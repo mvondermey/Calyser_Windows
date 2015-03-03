@@ -44,6 +44,16 @@ void CommunicationLayer::ReadDB(){
 //	
 };
 
+static int callback(void *data, int argc, char **argv, char **azColName){
+	//
+	fprintf(stderr, "%s: ", (const char*)data);
+	for (int i = 0; i<argc; i++){
+		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+	}
+	printf("\n");
+	return 0;
+}
+
 int CommunicationLayer::CheckLogin(String^ login, String^ password) {
 
 	OutputDebugStringW(L" Email ");
@@ -81,20 +91,47 @@ int CommunicationLayer::CheckLogin(String^ login, String^ password) {
 		//
 		OutputDebugStringA("Opened database successfully\n");
 		//
-		wstring Login = login->Data();
-		wstring sql = L"SELECT PASSWORD FROM LOGIN WHERE LOGIN=";
-		sql += Login;
+		string sqlsh = "create table if not exists LOGIN(LOGIN VAR, PASSWORD VAR)";
+		//
+		OutputDebugStringA(sqlsh.c_str());
 		//
 		char *zErrMsg = 0;
 		const char* data = "Callback function called";
 		//
-		result_conn = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+		result_conn = sqlite3_exec(db, sqlsh.c_str(), callback, (void*)data, &zErrMsg);
 		if (result_conn != SQLITE_OK){
-			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			OutputDebugStringA("\n SQL error: ");
+			OutputDebugStringA(to_string(result_conn).c_str());
+			OutputDebugStringA("\n SQL error: ");
+			OutputDebugStringA(zErrMsg);
+			OutputDebugStringA("\n");
 			sqlite3_free(zErrMsg);
 		}
 		else{
-			fprintf(stdout, "Operation done successfully\n");
+			OutputDebugStringA("Operation done successfully\n");
+		}
+		//
+		wstring Login = login->Data();
+		wstring sql = L"SELECT PASSWORD FROM LOGIN WHERE LOGIN=\"";
+		sql += Login;
+		sql += L"\"";
+		string sqlshort(sql.begin(),sql.end());
+		OutputDebugStringA(sqlshort.c_str());
+		//
+		zErrMsg = 0;
+		data = "Callback function called";
+		//
+		result_conn = sqlite3_exec(db, sqlshort.c_str(), callback, (void*)data, &zErrMsg);
+		if (result_conn != SQLITE_OK){
+			OutputDebugStringA("\n SQL error: ");
+			OutputDebugStringA(to_string(result_conn).c_str());
+			OutputDebugStringA("\n SQL error: ");
+			OutputDebugStringA(zErrMsg);
+			OutputDebugStringA("\n");
+			sqlite3_free(zErrMsg);
+		}
+		else{
+			OutputDebugStringA("Operation done successfully\n");
 		}
 		//
 	}
