@@ -44,15 +44,26 @@ void CommunicationLayer::ReadDB(){
 //	
 };
 
-static int callback(void *data, int argc, char **argv, char **azColName){
+static int callback(void *obj, int argc, char **argv, char **azColName){
 	//
-	fprintf(stderr, "%s: ", (const char*)data);
+	vector<std::pair<string,string>> *m_result = (vector<std::pair<string,string>>*) (obj);
+	m_result->clear();
+	//
 	for (int i = 0; i<argc; i++){
-		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+		string colname(azColName[i]);
+		string colentry(argv[i]);
+		m_result->push_back(std::make_pair(colname,colentry));
+		OutputDebugStringA("\n");
+		OutputDebugStringA(azColName[i]);
+		OutputDebugStringA(" = ");
+		OutputDebugStringA(argv[i] ? argv[i] : "NULL");
+		OutputDebugStringA("\n");
 	}
 	printf("\n");
 	return 0;
 }
+
+
 
 int CommunicationLayer::CheckLogin(String^ login, String^ password) {
 
@@ -98,7 +109,9 @@ int CommunicationLayer::CheckLogin(String^ login, String^ password) {
 		char *zErrMsg = 0;
 		const char* data = "Callback function called";
 		//
-		result_conn = sqlite3_exec(db, sqlsh.c_str(), callback, (void*)data, &zErrMsg);
+		vector<string>result;
+		//
+		result_conn = sqlite3_exec(db, sqlsh.c_str(), callback, (void*)&result, &zErrMsg);
 		if (result_conn != SQLITE_OK){
 			OutputDebugStringA("\n SQL error: ");
 			OutputDebugStringA(to_string(result_conn).c_str());
@@ -106,6 +119,7 @@ int CommunicationLayer::CheckLogin(String^ login, String^ password) {
 			OutputDebugStringA(zErrMsg);
 			OutputDebugStringA("\n");
 			sqlite3_free(zErrMsg);
+			return CANNOT_CREATE_TABLE;
 		}
 		else{
 			OutputDebugStringA("Operation done successfully\n");
@@ -121,7 +135,7 @@ int CommunicationLayer::CheckLogin(String^ login, String^ password) {
 		zErrMsg = 0;
 		data = "Callback function called";
 		//
-		result_conn = sqlite3_exec(db, sqlshort.c_str(), callback, (void*)data, &zErrMsg);
+		result_conn = sqlite3_exec(db, sqlshort.c_str(), callback, (void*) this,&zErrMsg);
 		if (result_conn != SQLITE_OK){
 			OutputDebugStringA("\n SQL error: ");
 			OutputDebugStringA(to_string(result_conn).c_str());
@@ -129,9 +143,11 @@ int CommunicationLayer::CheckLogin(String^ login, String^ password) {
 			OutputDebugStringA(zErrMsg);
 			OutputDebugStringA("\n");
 			sqlite3_free(zErrMsg);
+			return CANNOT_DO_LOGIN_SELECT;
 		}
 		else{
 			OutputDebugStringA("Operation done successfully\n");
+
 		}
 		//
 	}

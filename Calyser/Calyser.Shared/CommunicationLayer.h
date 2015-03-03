@@ -9,7 +9,9 @@ namespace CommLayer{
 		LOGIN_SUCCEED = 0,
 		LOGIN_EXIST_PASSWORD_WRONG,
 		LOGIN_NOT_EXIST,
-		CANNOT_OPEN_DB
+		CANNOT_OPEN_DB,
+		CANNOT_CREATE_TABLE,
+		CANNOT_DO_LOGIN_SELECT
 	};
 
 	ref class CommunicationLayer sealed
