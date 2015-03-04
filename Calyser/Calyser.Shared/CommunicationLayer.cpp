@@ -164,6 +164,24 @@ void CommunicationLayer::OnConnectionReceived(StreamSocketListener ^sender, Stre
 	std::string output = "Inside OnConectionReceived ";
 	output.append("\n");
 	OutputDebugStringA(output.c_str());
+	//
+	DataReader^ reader = ref new DataReader(CalyserSocket->InputStream);
+	//
+	while (true){
+		//
+		task <uint32> readerload(reader->LoadAsync(sizeof(uint32)));
+		//
+		//readerload.wait();
+		//
+		uint32 sizeFieldCount = readerload.get();
+		//
+		String^ m_string = reader->ReadString(sizeFieldCount);
+			//
+		OutputDebugStringW(m_string->Data());
+			//
+			//
+//		});
+	}
 	/*
 	concurrency::create_async([CalyserSocket]()
 	{
