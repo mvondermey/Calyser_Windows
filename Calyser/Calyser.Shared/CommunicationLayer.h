@@ -1,7 +1,5 @@
 #pragma once
 
-
- 
 namespace CommLayer{
 
 	enum LOGIN_RESULT
@@ -29,6 +27,8 @@ namespace CommLayer{
 
 	private:
 			
+		//Vector<StreamSocket> m_streamsockets;
+
 		void OnConnectionReceived(Windows::Networking::Sockets::StreamSocketListener ^, Windows::Networking::Sockets::StreamSocketListenerConnectionReceivedEventArgs ^);
 
 //		int callback(void *data, int argc, char **argv, char **azColName);

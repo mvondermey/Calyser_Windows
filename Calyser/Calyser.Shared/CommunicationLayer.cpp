@@ -19,9 +19,9 @@ using namespace Platform::Collections;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
 using namespace Windows::Networking::Sockets;
+using namespace Windows::Networking;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Streams;
-
 
 StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 
@@ -161,27 +161,65 @@ void CommunicationLayer::OnConnectionReceived(StreamSocketListener ^sender, Stre
 	//
 	StreamSocket ^CalyserSocket = args->Socket;
 	//
+	//m_streamsockets.Append(CalyserSocket);
+	//
 	std::string output = "Inside OnConectionReceived ";
 	output.append("\n");
 	OutputDebugStringA(output.c_str());
 	//
 	DataReader^ reader = ref new DataReader(CalyserSocket->InputStream);
+	reader->InputStreamOptions = InputStreamOptions::Partial;
 	//
-	while (true){
+	StreamSocketControl^ m_control = CalyserSocket->Control;
+	StreamSocketInformation^ m_information = CalyserSocket->Information;
+	HostName^ m_hostname = m_information->LocalAddress;
+	String^ m_port = m_information->LocalPort;
+	//
+	string request;
+	//
+	OutputDebugStringA("Loop \n");
+	//
+	task <unsigned int> readerload(reader->LoadAsync(4096));
+	//
+	OutputDebugStringA("Before wait\n");
+	//
+	readerload.wait();
+	//
+	OutputDebugStringA("Before get\n");
+	//
+	uint32 sizeFieldCount = readerload.get();
+	//
+	while (reader->UnconsumedBufferLength>0){
 		//
-		task <uint32> readerload(reader->LoadAsync(sizeof(uint32)));
+		OutputDebugStringA(" Open buffer = ");
+		OutputDebugStringA(to_string(reader->UnconsumedBufferLength).c_str());
+		OutputDebugStringA(" \n");
 		//
-		//readerload.wait();
+		OutputDebugStringA("After get \n");
 		//
-		uint32 sizeFieldCount = readerload.get();
-		//
-		String^ m_string = reader->ReadString(sizeFieldCount);
+			OutputDebugStringA(" = ");
+			OutputDebugStringA(to_string(sizeFieldCount).c_str());
+			OutputDebugStringA("\n");
 			//
-		OutputDebugStringW(m_string->Data());
+			//unsigned int bytesRead = reader->ReadUInt32();
+			wstring m_string(reader->ReadString(sizeFieldCount)->Data());
+			string m_string_short(m_string.begin(), m_string.end());
+			//string m_string_short(to_string(bytesRead));
 			//
+			OutputDebugStringA(m_string_short.c_str());
 			//
-//		});
+			request += m_string_short;
+			//
+
 	}
+	//
+	string m_request_short(request.begin(), request.end());
+	OutputDebugStringA(m_request_short.c_str());
+	//
+	OutputDebugStringA("Donw \n");
+	//
+	return;
+	//
 	/*
 	concurrency::create_async([CalyserSocket]()
 	{
@@ -206,6 +244,8 @@ IAsyncOperationWithProgress<IVector<int>^, double>^ CommunicationLayer::Runliste
 		OutputDebugStringA(output.c_str());
 		//
 		StreamSocketListener^ Listener = ref new StreamSocketListener;
+		//
+		StreamSocketListenerControl^ m_socketlistenercontrol = Listener->Control;
 		//
 		Listener->ConnectionReceived += ref new Windows::Foundation::TypedEventHandler<Windows::Networking::Sockets::StreamSocketListener ^, Windows::Networking::Sockets::StreamSocketListenerConnectionReceivedEventArgs ^>(this, &CommLayer::CommunicationLayer::OnConnectionReceived);
 		//	
