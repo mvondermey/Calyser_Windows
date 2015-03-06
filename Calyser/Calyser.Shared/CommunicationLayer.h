@@ -29,6 +29,8 @@ namespace CommLayer{
 			
 		//Vector<StreamSocket> m_streamsockets;
 
+		concurrency::task  <unsigned int> CommunicationLayer::WriteResponseAsync(Windows::Networking::Sockets::StreamSocket^ m_socket, Platform::String^ request);
+
 		void OnConnectionReceived(Windows::Networking::Sockets::StreamSocketListener ^, Windows::Networking::Sockets::StreamSocketListenerConnectionReceivedEventArgs ^);
 
 //		int callback(void *data, int argc, char **argv, char **azColName);

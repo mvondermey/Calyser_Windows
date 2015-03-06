@@ -175,50 +175,61 @@ void CommunicationLayer::OnConnectionReceived(StreamSocketListener ^sender, Stre
 	HostName^ m_hostname = m_information->LocalAddress;
 	String^ m_port = m_information->LocalPort;
 	//
-	string request;
+	String^ request;
 	//
 	OutputDebugStringA("Loop \n");
 	//
-	task <unsigned int> readerload(reader->LoadAsync(4096));
+	int bufferSize = 4096;
 	//
-	OutputDebugStringA("Before wait\n");
-	//
-	readerload.wait();
-	//
-	OutputDebugStringA("Before get\n");
-	//
-	uint32 sizeFieldCount = readerload.get();
-	//
-	while (reader->UnconsumedBufferLength>0){
+	while (true) {
 		//
-		OutputDebugStringA(" Open buffer = ");
-		OutputDebugStringA(to_string(reader->UnconsumedBufferLength).c_str());
-		OutputDebugStringA(" \n");
+		task <unsigned int> readerload(reader->LoadAsync(bufferSize));
 		//
-		OutputDebugStringA("After get \n");
+		OutputDebugStringA("Before wait\n");
 		//
+		readerload.wait();
+		//
+		OutputDebugStringA("Before get\n");
+		//
+		uint32 sizeFieldCount = readerload.get();
+		//
+		while (reader->UnconsumedBufferLength > 0){
+			//
+			OutputDebugStringA(" Open buffer = ");
+			OutputDebugStringA(to_string(reader->UnconsumedBufferLength).c_str());
+			OutputDebugStringA(" \n");
+			//
+			OutputDebugStringA("After get \n");
+			//
 			OutputDebugStringA(" = ");
 			OutputDebugStringA(to_string(sizeFieldCount).c_str());
 			OutputDebugStringA("\n");
 			//
 			//unsigned int bytesRead = reader->ReadUInt32();
-			wstring m_string(reader->ReadString(sizeFieldCount)->Data());
-			string m_string_short(m_string.begin(), m_string.end());
+			String^ m_string = reader->ReadString(sizeFieldCount);
+			//string m_string_short(m_string.begin(), m_string.end());
 			//string m_string_short(to_string(bytesRead));
 			//
-			OutputDebugStringA(m_string_short.c_str());
+			OutputDebugStringW(m_string->Data());
 			//
-			request += m_string_short;
+			request += m_string;
 			//
-
-	}
+		}
+		//
+		//string m_request_short(request.begin(), request.end());
+		OutputDebugStringW(request->Data());
+		//
+		OutputDebugStringA("Done \n");
+		//
+		if ( sizeFieldCount < bufferSize) break;
+		//
+	};
 	//
-	string m_request_short(request.begin(), request.end());
-	OutputDebugStringA(m_request_short.c_str());
+	// Analyse request / Write response
 	//
-	OutputDebugStringA("Donw \n");
+	//String^ s_request = ref new(m_request.c_);
 	//
-	return;
+	WriteResponseAsync(CalyserSocket,request);
 	//
 	/*
 	concurrency::create_async([CalyserSocket]()
@@ -229,6 +240,27 @@ void CommunicationLayer::OnConnectionReceived(StreamSocketListener ^sender, Stre
 		//
 	);
 	*/
+};
+
+task  <unsigned int> CommunicationLayer::WriteResponseAsync(StreamSocket^ m_socket, String^ request){
+	//
+	return create_task([this, m_socket, request ]()
+	{
+		//
+		DataWriter^ writer = ref new DataWriter(m_socket->OutputStream);	
+		//
+		OutputDebugStringA("Writing \n");
+		//
+		OutputDebugStringW(request->Data());
+		//
+		writer->WriteString(request);
+		//
+		OutputDebugStringA("Donee Writing \n");
+		//
+		unsigned int value = 0;
+		return value;
+	});
+	//
 };
 
 IAsyncOperationWithProgress<IVector<int>^, double>^ CommunicationLayer::Runlistener (int port) 
