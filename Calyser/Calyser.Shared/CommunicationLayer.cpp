@@ -247,15 +247,50 @@ task  <unsigned int> CommunicationLayer::WriteResponseAsync(StreamSocket^ m_sock
 	return create_task([this, m_socket, request ]()
 	{
 		//
-		DataWriter^ writer = ref new DataWriter(m_socket->OutputStream);	
+		DataWriter^ writer = ref new DataWriter(m_socket->OutputStream);
+		//writer.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
+		writer->UnicodeEncoding = Windows::Storage::Streams::UnicodeEncoding::Utf8;
 		//
 		OutputDebugStringA("Writing \n");
 		//
-		OutputDebugStringW(request->Data());
+		//String^ response = ref new String(L"HTTP/1.1 404 Not Found\r\n");
+		//response += "Content-Length:0\r\n";
+		//response +=	"Connection: close\r\n\r\n";
+		/*
+		writer->WriteString("HTTP/1.0 500 Internal server error\r\n");
+		writer->WriteString("Connection: close\r\n");
+		writer->WriteString("\r\n");
+		writer->WriteString(" Error \r\n");
+		*/
+		writer->WriteString("HTTP/1.1 200 OK \r\n");
+		writer->WriteString("Transfer-Encoding:chunked \r\n");
+		writer->WriteString("\r\n");
+		writer->WriteString("25 \r\n");
+		writer->WriteString("This is the data in the first chunk \r\n");
+		writer->WriteString("1A \r\n");
+		writer->WriteString("and this is the second one \r\n");
+		writer->WriteString("0 \r\n");
 		//
-		writer->WriteString(request);
+		//OutputDebugStringW(response->Data());
+		/*
+		while(true) {
+			auto result = writer->StoreAsync();
+			OutputDebugStringA(to_string(result->ErrorCode.Value).c_str());
+			if (result->Status.ToString()->Data() == L"Completed") break;
+		}
+		*/
 		//
-		OutputDebugStringA("Donee Writing \n");
+		task <unsigned int> m_store(writer->StoreAsync());
+		m_store.wait();
+		task <bool> m_flush(writer->FlushAsync());
+		m_flush.wait();
+		writer->DetachStream();
+		//
+		//m_socket->OutputStream->FlushAsync();
+		//
+		//writer->WriteString(response);
+		//
+		OutputDebugStringA("Done Writing \n");
 		//
 		unsigned int value = 0;
 		return value;

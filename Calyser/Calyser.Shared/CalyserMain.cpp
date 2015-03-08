@@ -33,7 +33,7 @@ m_deviceResources(deviceResources), m_pointerLocationX(0.0f), m_pointerLocationY
 	//
 	CommunicationLayer ^m_CommunicationLayer = ref new CommunicationLayer();
 	//
-	m_CommunicationLayer->Runlistener(8080);
+	m_CommunicationLayer->Runlistener(80);
 	//
 //
 
