@@ -18,6 +18,8 @@ Sample3DSceneRenderer::Sample3DSceneRenderer(const std::shared_ptr<DX::DeviceRes
 	CreateDeviceDependentResources();
 	CreateWindowSizeDependentResources();
 	//
+	//done
+	//
 	
 	//
 }
