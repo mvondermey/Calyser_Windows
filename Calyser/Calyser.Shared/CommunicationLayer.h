@@ -1,16 +1,19 @@
 #pragma once
 
+using namespace Windows::Networking::Sockets;
+
 namespace CommLayer{
 
-	enum LOGIN_RESULT
-	{
-		LOGIN_SUCCEED = 0,
-		LOGIN_EXIST_PASSWORD_WRONG,
-		LOGIN_NOT_EXIST,
-		CANNOT_OPEN_DB,
-		CANNOT_CREATE_TABLE,
-		CANNOT_DO_LOGIN_SELECT
-	};
+
+		enum LOGIN_RESULT
+		{
+			LOGIN_SUCCEED = 0,
+			LOGIN_EXIST_PASSWORD_WRONG,
+			LOGIN_NOT_EXIST,
+			CANNOT_OPEN_DB,
+			CANNOT_CREATE_TABLE,
+			CANNOT_DO_LOGIN_SELECT
+		};
 
 	ref class CommunicationLayer sealed
 	{
@@ -19,15 +22,27 @@ namespace CommLayer{
 
 		CommunicationLayer();
 
+
+
+		StreamSocket^ GetStreamSocket() {
+
+			return my_streamsockets;
+
+		}
+
 		int CheckLogin( Platform::String^ login, Platform::String^ password);
 
 		void ReadDB();
 
 		Windows::Foundation::IAsyncOperationWithProgress<Windows::Foundation::Collections::IVector<int>^, double>^ Runlistener(int port);
 
+		Windows::Foundation::IAsyncOperationWithProgress<Windows::Foundation::Collections::IVector<int>^, double>^ RunTalker();
+
+
 	private:
 			
-		//Vector<StreamSocket> m_streamsockets;
+
+		StreamSocket^ my_streamsockets;
 
 		concurrency::task  <unsigned int> CommunicationLayer::WriteResponseAsync(Windows::Networking::Sockets::StreamSocket^ m_socket, Platform::String^ request);
 
@@ -35,6 +50,7 @@ namespace CommLayer{
 
 //		int callback(void *data, int argc, char **argv, char **azColName);
 
+	//	Vector <StreamSocket^> streamsocketlist;
 
 	};
 

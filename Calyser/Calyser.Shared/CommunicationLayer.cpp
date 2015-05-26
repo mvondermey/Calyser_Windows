@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CommunicationLayer.h"
-#include "pch.h"
 #include <atomic>
 #include <collection.h>
 #include <ppltasks.h>
@@ -9,16 +8,17 @@
 #include <sqlite3.h>
 #include <string>
 
-
+//
 using namespace concurrency;
 using namespace std;
 using namespace CommLayer;
-
+//
+using namespace Windows::UI::Xaml::Media;
 using namespace Platform;
 using namespace Platform::Collections;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
-using namespace Windows::Networking::Sockets;
+//using namespace Windows::Networking::Sockets;
 using namespace Windows::Networking;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Streams;
@@ -27,7 +27,11 @@ StorageFolder^ localFolder = ApplicationData::Current->LocalFolder;
 
 CommunicationLayer::CommunicationLayer()
 {
-}
+	//
+	my_streamsockets = ref new StreamSocket();
+	//
+//	Vector<StreamSocket^> my_streamsockets;
+};
 
 //
 
@@ -62,7 +66,6 @@ static int callback(void *obj, int argc, char **argv, char **azColName){
 	printf("\n");
 	return 0;
 }
-
 
 
 int CommunicationLayer::CheckLogin(String^ login, String^ password) {
@@ -242,7 +245,11 @@ void CommunicationLayer::OnConnectionReceived(StreamSocketListener ^sender, Stre
 	*/
 };
 
+
+
 task  <unsigned int> CommunicationLayer::WriteResponseAsync(StreamSocket^ m_socket, String^ request){
+	//
+	
 	//
 	return create_task([this, m_socket, request ]()
 	{
@@ -297,6 +304,107 @@ task  <unsigned int> CommunicationLayer::WriteResponseAsync(StreamSocket^ m_sock
 	});
 	//
 };
+
+IAsyncOperationWithProgress<IVector<int>^, double>^ CommunicationLayer::RunTalker()
+{
+	return create_async([this](progress_reporter<double> reporter) -> IVector<int>^
+	{
+		//
+		std::string output = "Started Talker ";
+		output.append("\n");
+		OutputDebugStringA(output.c_str());
+		//
+		//auto socket = this->GetStreamSocket();
+		auto socket = ref new StreamSocket;
+		//
+		if (socket->Information->RemoteAddress){
+			OutputDebugStringA("SocketInformation\n");
+			OutputDebugStringW(socket->Information->RemoteAddress->ToString()->Data());
+			OutputDebugStringA("\n");
+		}
+		//
+		HostName^ hostname   = ref new HostName("192.168.137.225");
+		//
+		socket->Control->KeepAlive;
+		//
+
+		//
+		//auto getFileTask = create_task(localFolder->GetFileAsync(fileName))
+		//
+		wstring FilePath = (localFolder->Path->Data());
+		string FilePathShort(FilePath.begin(), FilePath.end());
+		//
+		//FilePathShort += "\\Caliser.db";
+		//
+		OutputDebugStringW(L" File location \n");
+		OutputDebugStringW(localFolder->Path->Data());
+		OutputDebugStringW(L"\n");
+		//
+		OutputDebugStringW(L" File listing\n");
+		OutputDebugStringW(localFolder->Path->Data());
+		OutputDebugStringW(L"\n");
+		//
+		create_task(localFolder->GetFilesAsync()).then([=](IVectorView<StorageFile^>^ FilesInFolder){
+			//Iterate over the results and print the list of files
+			// to the visual studio output window
+			for (auto it = FilesInFolder->First(); it->HasCurrent; it->MoveNext())
+			{
+				StorageFile^ file = it->Current;
+				String^ output = "file " + file->Name + "\n";
+				OutputDebugStringW(output->Begin());
+			}
+		});
+		//
+		OutputDebugStringW(L" Open Now Connection\n");
+		//
+		auto openconnection = create_task(socket->ConnectAsync(hostname, "80"));
+		/*
+		openconnection.then([this,socket](void)
+		{
+			//
+			//Now connect
+			//
+			DataReader^ reader = ref new DataReader(socket->InputStream);
+			DataWriter^ writer = ref new DataWriter(socket->OutputStream);
+			//
+			//write a string to the OutputStream
+			//
+			writer->WriteString("some data to send to host");
+			//
+			// commit and send the data in the OutputStream
+			writer->StoreAsync();
+			//
+		})
+			*/
+			openconnection.then([](task<void> t)
+		{
+			try
+			{
+				t.get();
+				// .get() didn't throw, so we succeeded.
+				OutputDebugStringA("Connected \n");
+			}
+			catch (Exception^ exception)
+			{
+				//Example output: The system cannot find the specified file.
+				//exception->Message->Data
+				OutputDebugStringW(exception->Message->Data());
+				OutputDebugStringA("Not Connected \n");
+			}
+
+		});
+		//
+		//
+		auto results = ref new Vector<int>();
+		//
+		output = "Stopped Talker ";
+		output.append("\n");
+		OutputDebugStringA(output.c_str());
+		//
+		return results;
+	});
+};
+
 
 IAsyncOperationWithProgress<IVector<int>^, double>^ CommunicationLayer::Runlistener (int port) 
 {

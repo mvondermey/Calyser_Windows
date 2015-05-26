@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Filter Include="Common">
       <UniqueIdentifier>a94f6215-0d29-4b2c-8318-553832e73a5d</UniqueIdentifier>
@@ -10,6 +13,9 @@
     </Filter>
     <Filter Include="Content">
       <UniqueIdentifier>8e9c196e-edef-4904-a88e-fe04c0300d8c</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SampleData">
+      <UniqueIdentifier>3bdd868d-bf0f-496e-8b82-a25ccc0a2c1d</UniqueIdentifier>
     </Filter>
     <Image Include="Assets\Logo.png">
       <Filter>Assets</Filter>
@@ -40,6 +46,7 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="Login.xaml.cpp" />
+    <ClCompile Include="File_and_Folders.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.xaml.h" />
@@ -54,6 +61,9 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Login.xaml.h" />
+    <ClInclude Include="File_and_Folders.xaml.h" />
+    <ClInclude Include="FileItem.h" />
+    <ClInclude Include="FeedData.h" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />
@@ -64,5 +74,11 @@
   <ItemGroup>
     <Page Include="DirectXPage.xaml" />
     <Page Include="Login.xaml" />
+    <Page Include="File_and_Folders.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <DesignData Include="SampleData\File_and_FoldersSampleData.xaml">
+      <Filter>SampleData</Filter>
+    </DesignData>
   </ItemGroup>
 </Project>
