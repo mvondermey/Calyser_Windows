@@ -53,6 +53,11 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 		m_login = ref new Login();
 	}
 
+	if (m_files_and_folder == nullptr)
+	{
+		m_files_and_folder = ref new File_and_Folders();
+	}
+
 
 	if (m_directXPage == nullptr)
 	{
@@ -65,8 +70,9 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 	}
 
 	// Place the page in the current window and ensure that it is active.
-	//	Window::Current->Content = m_directXPage;
-	Window::Current->Content = m_login;
+	//Window::Current->Content = m_directXPage;
+	//Window::Current->Content = m_login;
+	Window::Current->Content = m_files_and_folder;
 	Window::Current->Activate();
 }
 

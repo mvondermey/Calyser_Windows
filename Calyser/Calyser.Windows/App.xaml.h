@@ -8,6 +8,7 @@
 #include "App.g.h"
 #include "DirectXPage.xaml.h"
 #include "Login.xaml.h"
+#include "File_and_Folders.xaml.h"
 
 namespace Calyser
 {
@@ -25,5 +26,6 @@ namespace Calyser
 		void OnResuming(Platform::Object ^sender, Platform::Object ^args);
 		DirectXPage^ m_directXPage;
 		Login^ m_login;
+		File_and_Folders^ m_files_and_folder;
 	};
 }
