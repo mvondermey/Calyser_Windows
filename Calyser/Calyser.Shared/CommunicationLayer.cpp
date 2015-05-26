@@ -323,11 +323,22 @@ IAsyncOperationWithProgress<IVector<int>^, double>^ CommunicationLayer::RunTalke
 			OutputDebugStringA("\n");
 		}
 		//
-		HostName^ hostname   = ref new HostName("192.168.137.225");
+		HostName^ hostname;
+		//
+		String^ HostNameForConnect = "192.168.137.225" ;
+		//
+		try
+		{
+			hostname = ref new HostName(HostNameForConnect->ToString());
+		}
+		catch (InvalidArgumentException^ e)
+		{
+			//rootPage->NotifyUser("Error: Invalid host name.", NotifyType::ErrorMessage);
+			OutputDebugStringW(L" Error: Invalid host name \n");
+			OutputDebugStringW(L"\n");
+		}
 		//
 		socket->Control->KeepAlive;
-		//
-
 		//
 		//auto getFileTask = create_task(localFolder->GetFileAsync(fileName))
 		//
